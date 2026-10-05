@@ -1,14 +1,14 @@
 # transport-gateway-c
 
-The gateway transport layer in C over picoquic: it terminates client control streams and hands the result to the control plane over iceoryx2.
+The gateway edge contract and its first transport sources: a WebTransport datagram server in C over picoquic.
 
-## What it is for
+## What it holds
 
-It is the one place with a listening socket and the one place with nothing worth stealing. It holds no authority, runs no simulation and keeps no durable state, and it links the same QUIC and TLS libraries as the client so both ends of a connection run the same code. RFD 2123 covers the WebTransport edge and its second implementation.
+`gateway/README.md` states the edge contract: the one place with a listening socket, holding no authority, no simulation and no durable state. `transport/` holds the WebTransport datagram server sources, which share the QUIC library, picoquic, with the client. RFD 2123 covers the WebTransport edge and its second implementation.
 
 ## Build
 
-The repository has no top-level build, because the server program that will link this code is not written. Every dependency is vendored, so a clone needs no submodule fetch.
+The repository has no top-level build, because the server program that will link `transport/` is not written. `cmake/picoquic.cmake` builds picoquic against a system OpenSSL and an h2o install.
 
 ## Licence
 
